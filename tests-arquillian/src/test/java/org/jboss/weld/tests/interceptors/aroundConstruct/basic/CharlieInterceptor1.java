@@ -24,7 +24,17 @@ import junit.framework.Assert;
 
 @Interceptor
 @CharlieBinding
-public class CharlieInterceptor1 extends AbstractInterceptor {
+public class CharlieInterceptor1 {
+
+    private static boolean invoked;
+
+    public static boolean isInvoked() {
+        return invoked;
+    }
+
+    public static void reset() {
+        invoked = false;
+    }
 
     @AroundConstruct
     public void aroundConstruct(InvocationContext ctx) {
@@ -32,7 +42,7 @@ public class CharlieInterceptor1 extends AbstractInterceptor {
             ctx.proceed();
             Assert.fail();
         } catch (CharlieException expected) {
-            invoked();
+            invoked = true;
             throw expected;
         } catch (Exception e) {
             Assert.fail();

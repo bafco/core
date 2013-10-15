@@ -43,6 +43,7 @@ public class AroundConstructTest {
                 .addPackage(AroundConstructTest.class.getPackage()).addClass(Utils.class);
     }
 
+    @SuppressWarnings("static-access")
     @Test
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         AlphaInterceptor.reset();
@@ -50,6 +51,7 @@ public class AroundConstructTest {
         assertTrue(AlphaInterceptor.isInvoked());
     }
 
+    @SuppressWarnings("static-access")
     @Test
     public void testReplacingParameters(Instance<Bravo> instance) {
         BravoInterceptor.reset();

@@ -22,7 +22,17 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @CharlieBinding
-public class CharlieInterceptor2 extends AbstractInterceptor {
+public class CharlieInterceptor2 {
+
+    private static boolean invoked;
+
+    public static boolean isInvoked() {
+        return invoked;
+    }
+
+    public static void reset() {
+        invoked = false;
+    }
 
     @AroundConstruct
     public void aroundConstruct(InvocationContext ctx) {
@@ -31,7 +41,7 @@ public class CharlieInterceptor2 extends AbstractInterceptor {
         } catch (Exception e) {
             throw new RuntimeException();
         }
-        invoked();
+        invoked = true;
         throw new CharlieException();
     }
 

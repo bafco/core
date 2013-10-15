@@ -38,7 +38,7 @@ public abstract class AbstractInterceptor {
         invoked = false;
     }
 
-    public static void invoked() {
+    protected void invoked() {
         invoked = true;
     }
 
