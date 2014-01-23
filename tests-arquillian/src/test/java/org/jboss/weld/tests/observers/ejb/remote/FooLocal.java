@@ -16,11 +16,11 @@
  */
 package org.jboss.weld.tests.observers.ejb.remote;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
-@Remote
-public interface FooRemote {
+@Local
+public interface FooLocal {
 
-    public void observeGiraffeRemote(Giraffe giraffe);
+    public void observeGiraffeLocal(Giraffe giraffe);
 
 }

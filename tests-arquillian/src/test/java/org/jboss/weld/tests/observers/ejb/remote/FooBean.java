@@ -20,18 +20,30 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 
 @Stateless
-public class FooBean implements FooRemote {
+@LocalBean
+public class FooBean implements FooLocal, FooRemote {
 
     public static AtomicInteger observations = new AtomicInteger(0);
 
-    @Override
-    public void observeGiraffe(@Observes Giraffe giraffe) {
+    public static void observeGiraffe(@Observes Giraffe giraffe) {
         assertNotNull(giraffe);
         observations.incrementAndGet();
     }
 
+    @Override
+    public void observeGiraffeRemote(@Observes Giraffe giraffe) {
+        assertNotNull(giraffe);
+        observations.incrementAndGet();
+    }
+
+    @Override
+    public void observeGiraffeLocal(@Observes Giraffe giraffe) {
+        assertNotNull(giraffe);
+        observations.incrementAndGet();
+    }
 }
