@@ -18,6 +18,7 @@
         <module>tests/base</module>
         <module>tests/tomcat</module>
         <module>tests/jetty</module>
+        <module>tests/gae</module>
     </modules>
 
     <description>
@@ -33,6 +34,7 @@
         <jetty9.version>9.1.0.v20131115</jetty9.version>
         <!-- Jetty 6 API is used for GWT support only -->
         <jetty6.version>6.1.26</jetty6.version>
+        <gae.version>1.8.9</gae.version>
         <uel.glassfish.version>2.2</uel.glassfish.version>
         <!-- Testing deps -->
         <apache.httpclient.version>3.1</apache.httpclient.version>
@@ -145,6 +147,18 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-annotations</artifactId>
                 <version>${jetty.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-1.0-sdk</artifactId>
+                <version>${gae.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-tools-sdk</artifactId>
+                <version>${gae.version}</version>
             </dependency>
 
             <dependency>
