@@ -30,6 +30,12 @@ import org.junit.runner.RunWith;
 public class FilterInjectionTest extends FilterInjectionTestBase {
     @Deployment(testable = false)
     public static WebArchive deployment() {
+
+//        File[] libs = Maven.resolver().loadPomFromFile("../../../../../pom.xml")
+//                .resolve("org.jboss.weld.servlet:weld-servlet-core")
+//                .withTransitivity().asFile();
+
         return FilterInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");
+                //.addAsLibraries(libs);
     }
 }
