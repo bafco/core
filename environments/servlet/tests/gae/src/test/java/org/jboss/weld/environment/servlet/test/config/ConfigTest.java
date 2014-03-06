@@ -31,10 +31,10 @@ public class ConfigTest extends ConfigTestBase {
 
     @Deployment
     public static WebArchive getDeployment() {
-        return baseDOSDeployment()
+        return GaeDeployments.addLibraries(baseDOSDeployment()
                 // needed as this class is not in the weld-servlet.jar
                 .addClass(BeansXml.class)
-                .addAsWebInfResource(GaeDeployments.APPENGINE_WEB, "appengine-web.xml");
+                .addAsWebInfResource(GaeDeployments.APPENGINE_WEB, "appengine-web.xml"));
     }
 
 }

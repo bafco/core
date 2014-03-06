@@ -21,6 +21,7 @@ import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENG
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
 /**
@@ -30,12 +31,7 @@ import org.junit.runner.RunWith;
 public class FilterInjectionTest extends FilterInjectionTestBase {
     @Deployment(testable = false)
     public static WebArchive deployment() {
-
-//        File[] libs = Maven.resolver().loadPomFromFile("../../../../../pom.xml")
-//                .resolve("org.jboss.weld.servlet:weld-servlet-core")
-//                .withTransitivity().asFile();
-
-        return FilterInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");
-                //.addAsLibraries(libs);
+        return GaeDeployments.addLibraries(FilterInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB,
+                "appengine-web.xml"));
     }
 }

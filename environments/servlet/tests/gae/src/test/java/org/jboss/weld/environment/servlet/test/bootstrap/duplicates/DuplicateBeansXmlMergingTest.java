@@ -21,12 +21,15 @@ import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENG
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class DuplicateBeansXmlMergingTest extends DuplicateBeansXmlMergingTestBase {
     @Deployment
     public static WebArchive deployment() {
-        return DuplicateBeansXmlMergingTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");
+        return //GaeDeployments.addLibraries(
+                DuplicateBeansXmlMergingTestBase.deployment().addAsWebInfResource(APPENGINE_WEB,
+                "appengine-web.xml");//);
     }
 }

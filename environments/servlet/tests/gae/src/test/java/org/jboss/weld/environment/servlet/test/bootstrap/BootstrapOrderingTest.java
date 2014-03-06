@@ -22,6 +22,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.weld.environment.servlet.test.util.Deployments;
+import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
 /**
@@ -31,9 +32,10 @@ import org.junit.runner.RunWith;
 public class BootstrapOrderingTest extends BootstrapOrderingTestBase {
     @Deployment
     public static WebArchive deployment() {
-        return BootstrapOrderingTestBase.deployment()
+        return //GaeDeployments.addLibraries(
+                BootstrapOrderingTestBase.deployment()
                 // needed as this class is not in the weld-servlet.jar
                 .addClass(Deployments.class)
-                .addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");
+                .addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");//);
     }
 }

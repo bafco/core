@@ -21,6 +21,7 @@ import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENG
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
 /**
@@ -30,7 +31,8 @@ import org.junit.runner.RunWith;
 public class CDIProviderTest extends CDIProviderTestBase {
     @Deployment
     public static WebArchive getDeployment() {
-        return CDIProviderTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");
+        return GaeDeployments.addLibraries(CDIProviderTestBase.deployment().addAsWebInfResource(APPENGINE_WEB,
+                "appengine-web.xml"));
     }
 }
 

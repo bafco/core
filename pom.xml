@@ -410,13 +410,13 @@
                 <artifactId>shrinkwrap-descriptors-impl</artifactId>
                 <version>${shrinkwrap.descriptors.version}</version>
             </dependency>
-            
-<!--             <dependency> -->
-<!--                 <groupId>org.jboss.shrinkwrap.resolver</groupId> -->
-<!--                 <artifactId>shrinkwrap-resolver-depchain</artifactId> -->
-<!--                 <version>${shrinkwrap.resolver.version}</version> -->
-<!--                 <type>pom</type> -->
-<!--             </dependency> -->
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-depchain</artifactId>
+                <version>${shrinkwrap.resolver.version}</version>
+                <type>pom</type>
+            </dependency>
 
             <dependency>
                 <groupId>org.testng</groupId>

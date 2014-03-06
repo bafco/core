@@ -4,7 +4,13 @@
 
 <!-- TODO REVIEW: Does this file even make sense? -->
 	<engine>
-		<!-- property name="deploymentExportPath">target/</property-->
+		<property name="deploymentExportPath">target/</property>
 	</engine>
 
+    <container qualifier="jetty" default="true">
+        <configuration>
+<!--         Supported property names: [port, javaAgent, sdkDir, startupTimeout, address, disableUpdateCheck, serverTestURL, jvmFlags, server, startOnFirstThread -->
+        </configuration>
+    </container>
+    
 </arquillian>

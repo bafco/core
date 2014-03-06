@@ -21,6 +21,7 @@ import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENG
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
 /**
@@ -30,6 +31,7 @@ import org.junit.runner.RunWith;
 public class ServletInjectionTest extends ServletInjectionTestBase {
     @Deployment(testable = false)
     public static WebArchive deployment() {
-        return ServletInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-webv.xml");
+        return GaeDeployments.addLibraries(ServletInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB,
+                "appengine-webv.xml"));
     }
 }

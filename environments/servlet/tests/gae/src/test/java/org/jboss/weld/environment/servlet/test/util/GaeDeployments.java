@@ -16,8 +16,13 @@
  */
 package org.jboss.weld.environment.servlet.test.util;
 
+import java.io.File;
+
 import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 
 /**
  * @author Matus Abaffy
@@ -30,4 +35,13 @@ public class GaeDeployments {
     		"    <threadsafe>false</threadsafe>\n" +
     		"    <sessions-enabled>true</sessions-enabled>\n" +
     		"</appengine-web-app>");
+
+    public static WebArchive addLibraries(WebArchive war) {
+        PomEquippedResolveStage pers = Maven.resolver().loadPomFromFile("pom.xml");
+        File[] servlet = pers.resolve("org.jboss.weld.servlet:weld-servlet-core").withTransitivity().asFile();
+        File[] core = pers.resolve("org.jboss.weld:weld-core-impl").withTransitivity().asFile();
+        File[] jsp = pers.resolve("javax.servlet.jsp:jsp-api").withTransitivity().asFile();
+
+        return war.addAsLibraries(core).addAsLibraries(servlet).addAsLibraries(jsp);
+    }
 }
