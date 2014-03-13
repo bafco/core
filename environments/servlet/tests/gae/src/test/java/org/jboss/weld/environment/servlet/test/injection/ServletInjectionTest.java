@@ -31,7 +31,6 @@ import org.junit.runner.RunWith;
 public class ServletInjectionTest extends ServletInjectionTestBase {
     @Deployment(testable = false)
     public static WebArchive deployment() {
-        return GaeDeployments.addLibraries(ServletInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB,
-                "appengine-webv.xml"));
+        return GaeDeployments.addLibraries(ServletInjectionTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml"));
     }
 }

@@ -18,9 +18,16 @@ package org.jboss.weld.environment.servlet.test.el;
 
 import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENGINE_WEB;
 
+import java.io.File;
+
+import javax.faces.FacesException;
+import javax.faces.webapp.FacesServlet;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
 
@@ -31,6 +38,15 @@ import org.junit.runner.RunWith;
 public class JsfTest extends JsfTestBase {
     @Deployment(testable = false)
     public static WebArchive deployment() {
-        return GaeDeployments.addLibraries(JsfTestBase.deployment().addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml"));
+        PomEquippedResolveStage pers = Maven.resolver().loadPomFromFile("pom.xml");
+        File[] deps = pers
+                .resolve(
+                        "com.sun.faces:jsf-api:2.1.3", "com.sun.faces:jsf-impl:2.1.3",
+        // "org.jboss.spec.javax.faces:jboss-jsf-api_2.2_spec", "javax.el:el-api:2.2",
+                        "javax.enterprise:cdi-api", "org.jboss.spec.javax.annotation:jboss-annotations-api_1.2_spec")
+                .withTransitivity().asFile();
+        return GaeDeployments.addLibraries(JsfTestBase.deployment().addClasses(FacesServlet.class, FacesException.class)
+                .addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml")
+                .addAsLibraries(deps));
     }
 }

@@ -20,7 +20,9 @@ import static org.jboss.weld.environment.servlet.test.util.GaeDeployments.APPENG
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.weld.environment.servlet.test.util.BeansXml;
 import org.jboss.weld.environment.servlet.test.util.Deployments;
 import org.jboss.weld.environment.servlet.test.util.GaeDeployments;
 import org.junit.runner.RunWith;
@@ -32,10 +34,12 @@ import org.junit.runner.RunWith;
 public class BootstrapOrderingTest extends BootstrapOrderingTestBase {
     @Deployment
     public static WebArchive deployment() {
-        return //GaeDeployments.addLibraries(
+        return GaeDeployments.addLibraries(
                 BootstrapOrderingTestBase.deployment()
                 // needed as this class is not in the weld-servlet.jar
-                .addClass(Deployments.class)
-                .addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml");//);
+                .addClasses(Deployments.class, BeansXml.class)
+//                .addAsWebInfResource(new StringAsset("<!DOCTYPE Configure PUBLIC \"-//Mort Bay Consulting//DTD Configure//EN\" \"http://www.eclipse.org/jetty/configure.dtd\"><Configure id=\"webAppCtx\" class=\"org.eclipse.jetty.webapp.WebAppContext\"><New id=\"BeanManager\" class=\"org.eclipse.jetty.plus.jndi.Resource\"><Arg> <Ref id=\"webAppCtx\"/> </Arg><Arg>BeanManager</Arg><Arg><New class=\"javax.naming.Reference\"><Arg>javax.enterprise.inject.spi.BeanManager</Arg><Arg>org.jboss.weld.resources.ManagerObjectFactory</Arg><Arg/></New></Arg></New></Configure>"), "jetty-env.xml")
+//                .addAsWebInfResource(new StringAsset("org.jboss.weld.level = DEBUG"), "logging.properties")
+                .addAsWebInfResource(APPENGINE_WEB, "appengine-web.xml"));
     }
 }
